@@ -19,7 +19,7 @@
             <!-- Down arrow -->
             <div class="scroll-arrow">
                 <a href="#subjects">
-                    <!-- FontAwsome  -->
+                    <!-- FontAwesome  -->
                     <i class="fa-solid fa-arrow-down"></i>
                 </a>
             </div>
@@ -38,10 +38,15 @@
 
             {% for subject in subjects %}
                 <a href="/{{subject.url}}"
-                class="subject-card {{subject.name | lower}}">
-                    <i class ="{{subject.icon}}"></i>
-                    <h3>{{ subject.name }}</h3>
-                    <p>{{ subject.description }}</p>
+                    class="subject-card {{subject.name | lower}}">
+                        <i class ="{{subject.icon}}"></i>
+                        <h3>{{ subject.name }}</h3>
+                        <p>{{ subject.description }}</p>
+
+                        <!-- Resource Counter placeholder -->
+                        <div class="resource-badge">
+                            ?
+                        </div>
                 </a>
             {% endfor %}
 

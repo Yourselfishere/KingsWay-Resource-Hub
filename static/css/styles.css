@@ -129,7 +129,104 @@
 }
 
 /* Subject card colours */
-.subject-card.mathematics { border-top: 4px solid #3498db; }
+.subject-card.maths { border-top: 4px solid #3498db; }
 .subject-card.science     { border-top: 4px solid #27ae60; }
 .subject-card.english     { border-top: 4px solid #e74c3c; }
-.subject-card.dgt         { border-top: 4px solid #9b59b6; }
+.subject-card.digital-tech      { border-top: 4px solid #9b59b6; }
+
+/* Subject icon colours */
+.subject-card.maths i { color: #3498db; }
+.subject-card.science i     { color: #27ae60; }
+.subject-card.english i     { color: #e74c3c; }
+.subject-card.digital-tech i         { color: #9b59b6; }
+
+/* Subject selection section and heading text */
+.subject-selection {
+    padding: 20px 20px 20px 20px;
+    background: lightgrey;
+}
+
+.subject-selection h2 {
+    text-align: center;
+    font-size: large;
+    margin-bottom: 20px;
+    color: #333333;
+}
+
+/* CSS Grid Layout */
+.card-container {
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+/* Individual subject */
+.subject-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    background:white;
+    border-radius: 10px;
+    padding-inline: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    min-height: 200px;
+    text-decoration: none;
+    color:#333333;
+    gap: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Card hover effects */
+
+.subject-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    background: #f0f7ff;
+}
+
+.subject-card:active {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);    
+}
+
+/* Card icons */
+.subject-card i {
+    font-size: 2rem;
+    margin-bottom: 5px;
+}
+
+/* Card Titles */
+.subject-card h3 {
+    font-size: medium;
+    font-weight: bold;
+    margin: 0;
+}
+
+/* Card descriptions */
+.subject-card p {
+    font-size: small;
+    color: #666666;
+    text-align: center;
+    margin: 0;
+    
+}
+
+/* Resource badge */
+.resource-badge {
+    width: 40px;
+    height: 40px;
+    background: #333333;
+    border-radius: 50px;
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color:white;
+    font-size: 0.85rem;
+    font-weight: bold;
+}
