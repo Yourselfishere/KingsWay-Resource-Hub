@@ -1,33 +1,92 @@
-<!DOCTYPE html>
-<html lang="en">
-<!-- Document Setup -->
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" >
-    <title>KWS Resource Hub</title>
-    <!-- Link to CSS -->
-    <link rel="stylesheet" href="/static/css/styles.css">
-    <!-- Link to JS -->
-    <script src="script.js"></script>
-</head>
-<body>
-    <!-- Top Navigation Bar -->
-    <nav class="topnavbar">
+{% extends "base.html" %}
 
-        <!-- Logo Section -->
-        <div class="logo">
-            <a href="#"><img src="/img/KingsWayLogo.svg" alt="KingsWayLogo"></a>
+{% block title %}Home | KWS Resource Hub{% endblock %}
+
+{% block content %}
+
+    <!-- Hero section -->
+    <section class="hero">
+
+        <!-- Hero container -->
+        <div class="hero-container">
+            <!-- Site name  -->
+            <p>KingsWay Resource Hub</p>
+            <!-- Motto/Main punchline -->
+            <h1>Stop Searching. <br>Start Studying. </h1>
+
+            <!-- Rotating Line -->
+            <p class="rotating-line">
+                Your
+                <span class="text-container">
+                    <span>past papers</span>
+                    <span>video tutorials</span>
+                    <span>study guides</span>
+                    <span>practice questions</span>
+                    <span>past papers</span>
+                </span> in one place.
+            </p>
+            <!-- Description -->
+            <p>A site for Year 12-13 students studying NCEA</p>
+
+            <!-- Down arrow -->
+            <div class="scroll-arrow">
+                <a href="#subjects">
+                    <!-- FontAwesome  -->
+                    <i class="fa-solid fa-arrow-down"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- About this site section-->
+    <section class="about-this-site"> 
+
+        <!-- Limits width section -->
+        <div class="about-container">
+
+            <!-- label  -->
+            <p class="about-label">About</p>
+
+            <!-- section heading -->
+            <h2>What is KWS Resource Hub?</h2>
+
+            <!-- paragraph -->
+            <p class="about-text">KingsWay Resource Hub is designed as a study platform for Year 12-13 students at Kingsway School. It helps solves the headache that is finding NCEA resources. All the resources are here in one place, from past papers and video tutorials to study guides and references.</p>
+        
         </div>
 
-        <!-- Nav Bar Links -->
-        <ul class="nav_links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="maths.html">Maths</a></li>
-            <li><a href="science.html">Science</a></li>
-            <li><a href="english.html">English</a> </li>
-        </ul>
+    </section>
+
+
+    <!-- Subjects section -->
+    <section class="subject-selection" id="subjects">
+        <!-- Section heading -->
+        <h2>Find resources by subject</h2>
         
-    </nav>
-</body>
-</html>
+        <!-- Container section -->
+        <div class="card-container">
+            
+            <!-- Jinja loop for subject cards -->
+
+            {% for subject in subjects %}
+                <a href="/{{subject.url}}"
+                    class="subject-card {{subject.name | lower}}">
+                        <i class ="{{subject.icon}}"></i>
+                        <h3>{{ subject.name }}</h3>
+                        <p>{{ subject.description }}</p>
+
+                        <!-- Resource Counter placeholder -->
+                        <div class="resource-badge">
+                            ?
+                        </div>
+                </a>
+            {% endfor %}
+
+        </div>
+            
+
+    </section>
+ 
+{% endblock %}
 

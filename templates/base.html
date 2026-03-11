@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Document Setup -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+    <title>{% block title %} KWS Resource Hub {% endblock %}</title>
+    <!-- Link to CSS -->
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <!-- Link to JS -->
+    <script src="/static/js/script.js"></script>  
+    <!-- Font Awesome setup -->
+    <script src="https://kit.fontawesome.com/c703a6f906.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <nav class="topnavbar">
+        <!-- Logo Section -->
+        <div class="logo">
+            <a href="#"><img src="/static/img/KingsWayLogo.svg" alt="KingsWayLogo"></a>
+        </div>
+        <!-- Nav Bar Links -->
+        <ul class="nav_links">
+            <li><a href="/">Home</a></li>
+            <li><a href="maths.html">Maths</a></li>
+            <li><a href="science.html">Science</a></li>
+            <li><a href="english.html">English</a> </li>
+        </ul>
+    </nav>
+
+    {% block content %}
+    {% endblock %}
+
+    <!-- Footer section -->
+    <div class="footer">
+        <!-- Left side for copyright and attribution -->
+        <div class="footer-left">
+            <!-- copyright -->
+            <p>© Alex Wang 2026</p>
+            
+            <!-- attribution -->
+            <p>Compiled for educational purposes</p>
+        </div>
+
+        <!-- Middle to fill empty space -->
+        <div class="footer-middle">
+            <!-- site name -->
+            <p class="footer-name">KWS Resource Hub</p>
+            <!-- tagline -->
+            <p>NCEA resource hub for KingsWay students</p>
+        </div>
+
+        <!-- Right side for quick links -->
+        <div class="footer-right">
+            <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="maths.html">Maths</a></li>
+                    <li><a href="science.html">Science</a></li>
+                    <li><a href="english.html">English</a></li>
+                    <li><a href="dgt.html">Digital Tech</a></li>
+                </ul>
+        </div>
+
+        <!-- Bottom for FontAwesome attribution -->
+        <div class="footer-bottom">
+            <p>Icons: Font Awesome - https://fontawesome.com/license/free </p>
+        </div>
+    </div>
+</body>
+</html>
