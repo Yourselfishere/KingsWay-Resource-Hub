@@ -29,24 +29,13 @@ def page_not_found(e):
 # Subject pages
 @app.route("/<subject_url>")
 def subject_page(subject_url):
-    # mapping of url to template file
-    template_mapping = {
-        "mathematics": "maths.html",
-        "science": "science.html",
-        "english": "english.html",
-        "dgt": "dgt.html",
-    }
-    
-    # check url is valid
-    if subject_url not in template_mapping:
-        return render_template("404.html"), 404
-    
     # get subject from database matching url column
     subject = query_db(
         "SELECT * FROM subjects WHERE url = %s",
         (subject_url,)
     )
     
+    # if no subject found return 404
     if not subject:
         return render_template("404.html"), 404
     
@@ -87,8 +76,9 @@ def subject_page(subject_url):
     
     total_count = total[0]["total"] if total else 0
     
-    # get correct template from mapping
-    template = template_mapping[subject_url]
+    # template name built from url column directly
+    # mathematics -> maths.html, science -> science.html etc
+    template = f"{subject['url']}.html"
     
     return render_template(
         template,
