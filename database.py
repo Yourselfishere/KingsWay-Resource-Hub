@@ -2,16 +2,20 @@
 # Handles the database connection and query
 
 # import sqlite3
-import sqlite3
+import sqlite3, mysql
 
 # DB_Config - for SQLite, just the db file
 DB_FILE = 'app.db'
 
 # Connect to the database
 def get_db_connection():
-    connection = sqlite3.connect(DB_FILE)
-    connection.row_factory = sqlite3.Row  # to get dict-like rows
-    return connection
+    try: 
+        connection = sqlite3.connect(DB_FILE)
+        connection.row_factory = sqlite3.Row  # to get dict-like rows
+        return connection
+    except mysql.connector.Error as e:
+        print(f"Database connection failed: {e}")
+        return None
 
 def query_db(query, params=()):
     # open the connection
