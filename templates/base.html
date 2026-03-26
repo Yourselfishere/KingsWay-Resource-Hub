@@ -22,9 +22,9 @@
         <!-- Nav Bar Links -->
         <ul class="nav_links">
             <li><a href="/">Home</a></li>
-            <li><a href="maths.html">Maths</a></li>
-            <li><a href="science.html">Science</a></li>
-            <li><a href="english.html">English</a> </li>
+            {% for subject in subjects %}
+                <a href="/{{ subject.url }}">{{ subject.name }}</a>
+            {% endfor %}
         </ul>
     </nav>
 
@@ -68,7 +68,7 @@
                         <li><a href="maths.html">Maths</a></li>
                         <li><a href="science.html">Science</a></li>
                         <li><a href="english.html">English</a></li>
-                        <li><a href="dgt.html">Digital Tech</a></li>
+                        <li><a href="dgt.html">DGT</a></li>
                     </ul>
             </div>
         </div>

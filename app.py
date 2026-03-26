@@ -31,7 +31,7 @@ def page_not_found(e):
 def subject_page(subject_url):
     # get subject from database matching url column
     subject = query_db(
-        "SELECT * FROM subjects WHERE url = %s",
+        "SELECT * FROM subjects WHERE url = ?",
         (subject_url,)
     )
     
@@ -49,7 +49,7 @@ def subject_page(subject_url):
         FROM resources
         JOIN categories 
             ON resources.categories_id = categories.categories_id
-        WHERE resources.subject_id = %s
+        WHERE resources.subject_id = ?
         ORDER BY resources.date_added DESC
     """, (subject["subject_id"],))
     
@@ -62,7 +62,7 @@ def subject_page(subject_url):
         FROM categories
         JOIN resources 
             ON categories.categories_id = resources.categories_id
-        WHERE resources.subject_id = %s
+        WHERE resources.subject_id = ?
         GROUP BY categories.categories_id, categories.name
         ORDER BY categories.name
     """, (subject["subject_id"],))
@@ -71,17 +71,13 @@ def subject_page(subject_url):
     total = query_db("""
         SELECT COUNT(*) AS total
         FROM resources
-        WHERE subject_id = %s
+        WHERE subject_id = ?
     """, (subject["subject_id"],))
     
     total_count = total[0]["total"] if total else 0
     
-    # template name built from url column directly
-    # mathematics -> maths.html, science -> science.html etc
-    template = f"{subject['url']}.html"
-    
     return render_template(
-        template,
+        "subject.html",
         subject=subject,
         resources=resources,
         categories=categories,
