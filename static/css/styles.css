@@ -61,7 +61,7 @@ html {
     color: #FFCB70;
     font-family: sans-serif;
     font-size: 18px;    
-    transition: 0.3px ease;
+    transition: 0.3s ease;
 }
 
 /* Link text hover state */
@@ -109,7 +109,7 @@ html {
     color:white; 
     font-size: 5rem;
     font-weight: bold;
-    margin-bottom: large;
+    margin-bottom: 40px;
 }
 
 /* Subheading */
@@ -235,7 +235,7 @@ html {
     font-size: small;
     text-transform: uppercase;
     letter-spacing: 10px;
-    color:#3498db;
+    color:#0077cc;
     font-weight: bold;
     margin: 20px 0 0 0;
 }
@@ -342,13 +342,13 @@ html {
 }
 
 /* Subject card colours */
-.subject-card.maths { border-top: 4px solid #3498db; }
+.subject-card.maths { border-top: 4px solid #0077cc; }
 .subject-card.science     { border-top: 4px solid #27ae60; }
 .subject-card.english     { border-top: 4px solid #e74c3c; }
 .subject-card.digital-tech      { border-top: 4px solid #9b59b6; }
 
 /* Subject icon colours */
-.subject-card.maths i { color: #3498db; }
+.subject-card.maths i { color: #0077cc; }
 .subject-card.science i     { color: #27ae60; }
 .subject-card.english i     { color: #e74c3c; }
 .subject-card.digital-tech i         { color: #9b59b6; }
@@ -459,3 +459,402 @@ html {
    }
 }
     
+/* =====================
+   Subject page sections (subject.html)
+   ===================== */
+
+.subject-page .topnavbar {
+    background: #2c3e50;
+}
+
+/* Subject header */
+.subject-header {
+    background: var(--subject-colour);
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.subject-header-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.subject-header i {
+    font-size: x-large;
+    color:white;
+    opacity: 0.8;
+}
+
+.subject-header h1 {
+    color: white;
+    font-size: large;
+    font-weight: bold;
+    margin: 0;
+}
+
+.subject-header p {
+    color:white;
+    opacity: 0.8;
+    font-size: small;
+    margin: 0;
+}
+
+/* Subject wrapper */
+.subject-wrapper {
+    display: grid;
+    grid-template-columns: 260px 1fr ;
+    gap: 20px;
+    max-width: 1400px;
+    margin: 20px 40px; 
+    padding: 40px; 
+    align-items: start;
+}
+
+/* Sidebar */
+.subject-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: sticky;
+    top: 90px;
+}
+
+.ncea-filter, .filter-section {
+    background: white;
+    border-radius: 10px;
+    padding: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.ncea-filter h3, .filter-section h3 {
+    font-size: small;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    color: #2c3e50; 
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid grey;
+}
+
+.ncea-filter ul, .filter-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex; 
+    flex-direction: column;
+    gap: 5px;
+}
+
+.ncea-filter label, .filter-section label {
+    display: flex; 
+    align-items: center;
+    gap: 5px;
+    font-size: small;
+    cursor: pointer;
+    color: darkgrey;
+}
+
+.ncea-filter label:hover, .filter-section label:hover {
+    color: #0077cc;
+}
+
+.filter-count {
+    margin-left: auto;
+    font-size: x-small;
+    color: grey;
+    background: lightgrey;
+    padding: 2px 6px;
+    border-radius: 30px;
+}
+
+.resource-counter {
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+}
+
+.counter-number {
+    display: block;
+    font-size: xx-large;
+    font-weight: bold;
+    color: white; 
+    line-height: 1;
+}
+
+.counter-label {
+    font-size: small;
+    color:white; 
+    opacity: 0.8; 
+}
+
+/* Topbar of the content */
+.content-topbar {
+    display: flex; 
+    align-items: center;
+    gap: 0;
+    margin-bottom: 24px;
+}
+
+#subject-search-input {
+    flex: 1; 
+    padding: 12px 16px;
+    border: 1px solid lightgrey; 
+    border-right: none;
+    border-radius: 8px 0 0 8px;
+    font-size: small;
+    outline: none; 
+}
+
+#subject-search-input:focus {
+    border-color: #0077cc;
+}
+
+#search-button {
+    padding: 12px 20px;
+    background: #0077cc;
+    color: white; 
+    border: 1px solid #0077cc; 
+    border-radius: 0 8px 8px 0;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: small;
+}
+
+#search-button:hover {
+    background: #005fa3; 
+}
+
+.view-toggle {
+    display: flex;
+    gap: 4px;
+    margin-left: auto;
+    padding-left: 16px;
+}
+
+.view-toggle button {
+    width: 40px;
+    height: 40px;
+    border: 1px solid lightgrey; 
+    border-radius: 8px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.view-button i {
+    font-size: 14px;
+    line-height: 1;
+}
+
+.toggle-button {
+    background: white; 
+    color: grey; 
+}
+
+.toggle-button:hover {
+    background: #f5f5f5;
+    border-color: #0077cc;
+    color: #0077cc;
+}
+
+.toggle-button-active {
+    background: #0077cc;
+    color: white;
+    border-color: #0077cc;
+}
+/* Resource tabs */
+.resource-tabs {
+    display: flex; 
+    gap: 0;
+    border-bottom: 2px solid lightgrey; 
+    margin-bottom: 24px;
+}
+
+.tab {
+    padding: 5px 20px 5px 20px;
+    background: transparent;
+    border: none; 
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    cursor: pointer;
+    font-size: small;
+    color:grey;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.tab.active {
+    color: #0077cc;
+    border-bottom-color: #0077cc;
+    font-weight: bold;
+}
+
+.tab:hover {
+    color: #0077cc;
+}
+
+/* Resource grid */
+.resource-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px; 
+}
+
+.resource-card.hidden {
+    display: none;
+}
+
+/* Resource cards */
+.resource-card {
+    background: white; 
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border: 1px solid #bebebe;
+    display: flex; 
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Category badge */
+.category-badge {
+    display: inline-block;
+    font-size: x-small;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 8px;
+    padding: 4px 8px; 
+    margin: 5px;
+    border-radius: 15px;
+    align-self: flex-start;
+}
+
+.category-badge.videos {
+    background: lightblue;
+    color: darkblue;
+}
+
+.category-badge.past\ papers {
+    background: red;
+    color: darkred;
+}
+
+.category-badge.study\ guides {
+    background: lightgreen;
+    color: darkgreen;
+}
+
+.category-badge.extra\ help {
+    background: #BF77F6;
+    color: #301934; 
+}
+
+/* Card body */
+.resource-card-body {
+    padding: 10px; 
+    flex: 1; 
+}
+
+.resource-card-body h3 {
+    font-size: medium;
+    font-weight: bold;
+    color: darkgrey; 
+    margin-bottom: 5px;
+    line-height: 1.3;
+}
+
+.resource-meta {
+    font-size: x-small;
+    color:lightgrey;
+    margin-bottom: 7px;
+}
+
+.resource-description {
+    font-size: small;
+    color: #939799;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Card footers */
+.resource-card-footer {
+    padding: 5px;
+    border-top: 1px solid #D3D3D3;
+    margin-top: auto;
+}
+
+.resource-button {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    text-align: center;
+    background: white;
+    border: 1px solid lightgrey;
+    border-radius: 15px;
+    color: darkgrey; 
+    text-decoration: none;
+    font-size: small;
+    font-weight: bold;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.resource-button:hover {
+    background: #0077cc;
+    color: white; 
+    border-color: #0077cc;
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    padding-top: 24px;
+    border-top: 1px solid lightgrey;
+}
+
+.page-button {
+    padding: 10px 20px;
+    border: 1px solid lightgrey;
+    border-radius: 8px;
+    background: white;
+    cursor: pointer;
+    color:#555;
+    font-size: small;
+    font-weight: 500;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.page-button:hover {
+    background: #0077cc;
+    color: white;
+    border-color: #0077cc;
+}
+
+.current-page-indicator {
+    font-size: small;
+    color:grey;
+}
+
+.page-button:disabled {
+    background: #f5f5f5; 
+    color: #ccc;
+    border-color: #e0e0e0;
+    cursor: not-allowed;
+}
+
+.current-page-indicator {
+    font-size: small;
+    color: #555; 
+    font-weight: 500; 
+}
+
+/* TODO: Add list view change */

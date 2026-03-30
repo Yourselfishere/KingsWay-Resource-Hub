@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% block body_class %}subject-page{% endblock %}
 
 {% block title %} {{ subject.name }} | KWS Resource Hub {% endblock %}
 
@@ -53,7 +54,7 @@
                 {% for category in categories %}
                 <li>
                     <label>
-                        <input type="checkbox" class="filter-checkbox" data-category="{{ category.name | lower }}" checked>
+                        <input type="checkbox" class="filter-checkbox" data-category="{{ category.name | lower }}" checked> {{ category.name }}
                         <span class="filter-count">
                             {{ category.resource_count }}
                         </span>
@@ -107,7 +108,9 @@
                 All ({{ total_count }})
             </button>
             {% for category in categories %}
-            <button class="tab" data-filter="{{ category.name }} ({{category.resource_count}})"></button>
+            <button class="tab" data-filter="{{ category.name | lower }}">
+                {{ category.name }} ({{ category.resource_count }})
+            </button>
             {% endfor %}
         </div>
 
@@ -116,37 +119,40 @@
             <!-- loop through the resources from flask -->
             {% for resource in resources %}
 
-            <!-- Category badge -->
-            <span class="resource-card" data-category="{{ resource.category_name | lower }}">
-                {{ resource.category_name }}
-            </span>
+            <div class="resource-card" data-category="{{ resource.category_name | lower }}">
+                <!-- Category badge -->
+                <span class="category-badge {{ resource.category_name | lower }}">
+                    {{ resource.category_name }}
+                </span>
 
-            <!-- Card body -->
-            <div class="resource-card-body">
-                <h3>{{ resource.title }}</h3>
-                <p class="resource-meta">
-                    {{ subject.name }} · {{resource.description}}
-                </p>
-                <p class="resource-description">
-                    {{ resource.description }}
-                </p>
+                <!-- Card body -->
+                <div class="resource-card-body">
+                    <h3>{{ resource.title }}</h3>
+                    <p class="resource-meta">
+                        {{ subject.name }} · {{resource.category_name}}
+                    </p>
+                    <p class="resource-description">
+                        {{ resource.description }}
+                    </p>
+                </div>
+                
+                <!-- Card footer -->
+                <div class="resource-card-footer">
+                    <a href="{{ resource.url }}" target="_blank" class="resource-button">
+                        {% if resource.category_name == "Videos" %}
+                            Watch
+                        {% elif resource.category_name == "Past Papers" %}
+                            Download
+                        {% else %}
+                            View
+                        {% endif %}
+                    </a>
+                </div>
+
             </div>
-            
-            <!-- Card footer -->
-             <div class="resource-card-footer">
-                <a href="{{ resource.url }}" target="_blank" class="resource-button">
-                    {% if resource.category_name == "Videos" %}
-                        Watch
-                    {% elif resource.category_name == "Past Papers" %}
-                        Download
-                    {% else %}
-                        View
-                    {% endif %}
-                </a>
-             </div>
-
+            {% endfor %}
         </div>
-        {% endfor %}
+        
     
         <!-- Pagination -->
         <div class="pagination">

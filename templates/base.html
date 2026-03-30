@@ -8,22 +8,22 @@
     <!-- Link to CSS -->
     <link rel="stylesheet" href="/static/css/styles.css">
     <!-- Link to JS -->
-    <script src="/static/js/script.js"></script>  
+    <script src="/static/js/script.js" defer></script>  
     <!-- Font Awesome setup -->
     <script src="https://kit.fontawesome.com/c703a6f906.js" crossorigin="anonymous"></script>
 </head>
-<body>
-    <!-- Top Navigation Bar -->
+<body class="{% block body_class %}{% endblock %}">
+    <!-- Top Navigation Bar --> 
     <nav class="topnavbar">
         <!-- Logo Section -->
         <div class="logo">
-            <a href="#"><img src="/static/img/KingsWayLogo.svg" alt="KingsWayLogo"></a>
+            <a href="/"><img src="/static/img/KingsWayLogo.svg" alt="KingsWayLogo"></a>
         </div>
         <!-- Nav Bar Links -->
         <ul class="nav_links">
             <li><a href="/">Home</a></li>
             {% for subject in subjects %}
-                <a href="/{{ subject.url }}">{{ subject.name }}</a>
+                <li><a href="/{{ subject.url }}">{{ subject.name }}</a></li>
             {% endfor %}
         </ul>
     </nav>
@@ -62,13 +62,13 @@
 
             <!-- Right side for quick links -->
             <div class="footer-right">
-                <p class="footer-links">Quick Links</h4>
+                <p class="footer-links">Quick Links</p>
                     <ul>
                         <li><a href="/">Home</a></li>
-                        <li><a href="maths.html">Maths</a></li>
-                        <li><a href="science.html">Science</a></li>
-                        <li><a href="english.html">English</a></li>
-                        <li><a href="dgt.html">DGT</a></li>
+                        <li><a href="/mathematics">Maths</a></li>
+                        <li><a href="/science">Science</a></li>
+                        <li><a href="/english">English</a></li>
+                        <li><a href="/dgt">DGT</a></li>
                     </ul>
             </div>
         </div>

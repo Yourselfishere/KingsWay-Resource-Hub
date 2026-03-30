@@ -26,6 +26,11 @@ def index():
 def page_not_found(e): 
     return render_template("404.html")
 
+@app.context_processor
+def inject_subjects():
+    subjects = query_db("SELECT * FROM subjects ORDER BY subject_id")
+    return dict(subjects=subjects)
+
 # Subject pages
 @app.route("/<subject_url>")
 def subject_page(subject_url):
