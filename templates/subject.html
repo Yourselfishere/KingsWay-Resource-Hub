@@ -79,6 +79,34 @@
     <!-- Right main section -->
     <main class="subject-content">
         
+        <!-- Subject title bar -->
+        <div class="subject-title-bar">
+
+            <!-- Breadcrumb nav -->
+            <nav class="subject-breadcrumb" aria-label="Breadcrumb">
+                <a href="/"><i class="fa-solid fa-house"></i></a>
+                <span class="breadcrumb-arrow">,</span>
+
+                <!-- Dynamic NCEA level indicator -->
+                <span class="breadcrumb-level" id="breadcrumb-level">
+                    All Levels
+                </span>
+
+                <span class="breadcrumb-arrow">,</span>
+
+                <!-- Current subject -->
+                <span class="breadcrumb-current">
+                    <i class="{{ subject.icon }}"></i>
+                    {{ subject.name }}
+                </span>
+            </nav>
+
+            <!-- Subject title -->
+            <div class="subject-title-row">
+                <h1 class="subject-title">{{ subject.name }}</h1>
+                <span class="subject-resource-count">{{ total_count }} resources</span>
+            </div>
+        </div>
         <!-- Top bar -->
         <div class="content-topbar">
             
