@@ -1,3 +1,6 @@
+/* Inter font from google fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
 /* =====================
    Document Setup and Nav bar (base.html)
    ===================== */
@@ -14,6 +17,9 @@ html {
     scroll-behavior: smooth;
 }
 
+body {
+    font-family: 'Inter', sans-serif;
+}
 
 /* Flexbox Nav Bar setup */
 .topnavbar {
@@ -342,16 +348,16 @@ html {
 }
 
 /* Subject card colours */
-.subject-card.maths { border-top: 4px solid #0077cc; }
-.subject-card.science     { border-top: 4px solid #27ae60; }
-.subject-card.english     { border-top: 4px solid #e74c3c; }
-.subject-card.digital-tech      { border-top: 4px solid #9b59b6; }
+.subject-card.maths        { border-top: 4px solid #3498db; }
+.subject-card.science      { border-top: 4px solid #27ae60; }
+.subject-card.english      { border-top: 4px solid #e74c3c; }
+.subject-card.digital-tech { border-top: 4px solid #9b59b6; }
 
 /* Subject icon colours */
-.subject-card.maths i { color: #0077cc; }
-.subject-card.science i     { color: #27ae60; }
-.subject-card.english i     { color: #e74c3c; }
-.subject-card.digital-tech i         { color: #9b59b6; }
+.subject-card.maths i        { color: #3498db; }
+.subject-card.science i      { color: #27ae60; }
+.subject-card.english i      { color: #e74c3c; }
+.subject-card.digital-tech i { color: #9b59b6; }
 
 /* Resource badge */
 .resource-badge {
@@ -460,17 +466,15 @@ html {
 }
     
 /* =====================
-   Subject Page (subject.html)
+   Subject page (subject.html)
    ===================== */
 
-/* Solid navbar on subject pages */
 .subject-page .topnavbar {
     background: rgba(44, 62, 80, 0.95);
 }
 
-/* Subject Header */
 .subject-header {
-    background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+    background: var(--subject-colour);
     padding: 100px 20px 40px;
     text-align: center;
 }
@@ -485,6 +489,7 @@ html {
     color: white;
     margin-bottom: 16px;
     display: block;
+    opacity: 0.9;
 }
 
 .subject-header h1 {
@@ -501,7 +506,6 @@ html {
     margin: 0;
 }
 
-/* Level Selector */
 .level-selector {
     display: flex;
     justify-content: center;
@@ -512,10 +516,11 @@ html {
 
 .level-btn {
     padding: 12px 32px;
-    border: 2px solid #27ae60;
+    border: 2px solid var(--subject-colour);
     border-radius: 50px;
     background: white;
-    color: #27ae60;
+    color: var(--subject-colour);
+    font-family: 'Inter', sans-serif;
     font-size: 0.95rem;
     font-weight: 600;
     cursor: pointer;
@@ -523,25 +528,23 @@ html {
 }
 
 .level-btn:hover {
-    background: #f0fff4;
+    background: color-mix(in srgb, var(--subject-colour) 8%, white);
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(39, 174, 96, 0.2);
 }
 
 .level-btn.active {
-    background: #27ae60;
+    background: var(--subject-colour);
     color: white;
     box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
 }
 
-/* Standards Container */
 .standards-container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px 60px;
 }
 
-/* Standards Tabs */
 .standards-tabs {
     background: white;
     border-radius: 16px;
@@ -569,6 +572,7 @@ html {
     border: none;
     border-bottom: 3px solid transparent;
     background: transparent;
+    font-family: 'Inter', sans-serif;
     transition: all 0.2s ease;
 }
 
@@ -578,7 +582,7 @@ html {
 
 .standard-tab.active {
     background: white;
-    border-bottom-color: #27ae60;
+    border-bottom-color: var(--subject-colour);
 }
 
 .standard-code {
@@ -589,9 +593,7 @@ html {
     margin-bottom: 4px;
 }
 
-.standard-tab.active .standard-code {
-    color: #27ae60;
-}
+.standard-tab.active .standard-code { color: var(--subject-colour); }
 
 .standard-name {
     display: block;
@@ -600,11 +602,8 @@ html {
     font-weight: 500;
 }
 
-.standard-tab.active .standard-name {
-    color: #27ae60;
-}
+.standard-tab.active .standard-name { color: var(--subject-colour); }
 
-/* Standard Content */
 .standard-content {
     background: white;
     border-radius: 16px;
@@ -631,7 +630,7 @@ html {
 }
 
 .resource-count-badge {
-    background: #27ae60;
+    background: var(--subject-colour);
     color: white;
     padding: 8px 24px;
     border-radius: 50px;
@@ -640,7 +639,6 @@ html {
     white-space: nowrap;
 }
 
-/* Filter Pills */
 .filter-pills {
     display: flex;
     gap: 10px;
@@ -657,24 +655,23 @@ html {
     border-radius: 50px;
     background: white;
     color: #555;
+    font-family: 'Inter', sans-serif;
     font-size: 0.9rem;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.2s ease;
 }
 
-.filter-pill i {
-    font-size: 0.85rem;
-}
+.filter-pill i { font-size: 0.85rem; }
 
 .filter-pill:hover {
-    border-color: #27ae60;
-    color: #27ae60;
+    border-color: var(--subject-colour);
+    color: var(--subject-colour);
 }
 
 .filter-pill.active {
-    border-color: #27ae60;
-    color: #27ae60;
+    border-color: var(--subject-colour);
+    color: var(--subject-colour);
 }
 
 .pill-count {
@@ -687,18 +684,16 @@ html {
 }
 
 .filter-pill.active .pill-count {
-    background: #27ae60;
+    background: var(--subject-colour);
     color: white;
 }
 
-/* Resource Grid */
 .resource-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 16px;
 }
 
-/* Resource Cards */
 .resource-card {
     background: #f8f9fa;
     border-radius: 14px;
@@ -718,7 +713,6 @@ html {
     transform: translateY(-3px);
 }
 
-/*   Resource Type Badges ─            */
 .resource-type-badge {
     display: inline-flex;
     align-items: center;
@@ -751,9 +745,7 @@ html {
     color: #6c3483;
 }
 
-.resource-type-badge i {
-    font-size: 0.78rem;
-}
+.resource-type-badge i { font-size: 0.78rem; }
 
 .resource-card h3 {
     font-size: 1.05rem;
@@ -771,7 +763,6 @@ html {
     flex: 1;
 }
 
-/*   Resource Button */
 .resource-button {
     display: inline-flex;
     align-items: center;
@@ -783,6 +774,7 @@ html {
     border: 1.5px solid #e0e0e0;
     color: #555;
     text-decoration: none;
+    font-family: 'Inter', sans-serif;
     font-size: 0.82rem;
     font-weight: 600;
     align-self: flex-start;
@@ -790,8 +782,8 @@ html {
 }
 
 .resource-button:hover {
-    background: #27ae60;
-    border-color: #27ae60;
+    background: var(--subject-colour);
+    border-color: var(--subject-colour);
     color: white;
 }
 

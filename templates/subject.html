@@ -4,113 +4,116 @@
 
 {% block content %}
 
-<!-- Subject Header -->
-<section class="subject-header">
-    <div class="subject-header-container">
-        <i class="{{ subject.icon }}"></i>
-        <h1>{{ subject.name }}</h1>
-        <p>Select your NCEA level and standard</p>
-    </div>
-</section>
+<div class="subject-root" style="--subject-colour: {{ subject.colour }}">
 
-<!-- Level Selector -->
-<div class="level-selector">
-    <button class="level-btn active" data-level="2">Level 2</button>
-    <button class="level-btn" data-level="3">Level 3</button>
-</div>
-
-<!-- Standards Container -->
-<div class="standards-container">
-
-    <!-- Standards Tabs -->
-    <div class="standards-tabs">
-        <div class="standards-tab-list">
-            {% for standard in standards %}
-            <button class="standard-tab {% if loop.first %}active{% endif %}"
-                    data-standard="{{ standard.code }}"
-                    data-level="{{ standard.ncea_level }}"
-                    data-description="{{ standard.description }}">
-                <span class="standard-code">{{ standard.code }}</span>
-                <span class="standard-name">{{ standard.topic }}</span>
-            </button>
-            {% endfor %}
+    <!-- Subject Header -->
+    <section class="subject-header">
+        <div class="subject-header-container">
+            <i class="{{ subject.icon }}"></i>
+            <h1>{{ subject.name }}</h1>
+            <p>Select your NCEA level and standard</p>
         </div>
+    </section>
+
+    <!-- Level Selector -->
+    <div class="level-selector">
+        <button class="level-btn active" data-level="2">Level 2</button>
+        <button class="level-btn" data-level="3">Level 3</button>
     </div>
 
-    <!-- Standard Content -->
-    <div class="standard-content">
+    <!-- Standards Container -->
+    <div class="standards-container">
 
-        <!-- Standard Header -->
-        <div class="standard-header">
-            {% if standards %}
-            <h2 class="standard-title">{{ standards[0].code }} — {{ standards[0].description }}</h2>
-            {% else %}
-            <h2 class="standard-title">{{ subject.name }} Resources</h2>
-            {% endif %}
-            <span class="resource-count-badge" id="resource-count-badge">{{ total_count }} resources</span>
+        <!-- Standards Tabs -->
+        <div class="standards-tabs">
+            <div class="standards-tab-list">
+                {% for standard in standards %}
+                <button class="standard-tab {% if loop.first %}active{% endif %}"
+                        data-standard="{{ standard.code }}"
+                        data-level="{{ standard.ncea_level }}"
+                        data-description="{{ standard.description }}">
+                    <span class="standard-code">{{ standard.code }}</span>
+                    <span class="standard-name">{{ standard.topic }}</span>
+                </button>
+                {% endfor %}
+            </div>
         </div>
 
-        <!-- Filter Pills -->
-        <div class="filter-pills">
-            <button class="filter-pill active" data-filter="all">
-                <i class="fa-solid fa-layer-group"></i>
-                All
-                <span class="pill-count">{{ total_count }}</span>
-            </button>
-            {% for category in categories %}
-            <button class="filter-pill" data-filter="{{ category.name }}">
-                {% if 'video' in category.name %}
-                    <i class="fa-solid fa-video"></i>
-                {% elif category.name == 'study-guide' %}
-                    <i class="fa-solid fa-book"></i>
-                {% elif category.name == 'past-paper' %}
-                    <i class="fa-solid fa-file-lines"></i>
+        <!-- Standard Content -->
+        <div class="standard-content">
+
+            <!-- Standard Header -->
+            <div class="standard-header">
+                {% if standards %}
+                <h2 class="standard-title">{{ standards[0].code }} — {{ standards[0].description }}</h2>
                 {% else %}
-                    <i class="fa-solid fa-folder"></i>
+                <h2 class="standard-title">{{ subject.name }} Resources</h2>
                 {% endif %}
-                {{ category.name | replace('-', ' ') | title }}
-                <span class="pill-count">{{ category.resource_count }}</span>
-            </button>
-            {% endfor %}
-        </div>
+                <span class="resource-count-badge" id="resource-count-badge">{{ total_count }} resources</span>
+            </div>
 
-        <!-- Resource Grid -->
-        <div class="resource-grid" id="resource-container">
-            {% for resource in resources %}
-            <div class="resource-card"
-                 data-category="{{ resource.category_name }}"
-                 data-standard="{{ resource.standard_id }}">
-
-                <span class="resource-type-badge {{ resource.category_name }}">
-                    {% if 'video' in resource.category_name %}
+            <!-- Filter Pills -->
+            <div class="filter-pills">
+                <button class="filter-pill active" data-filter="all">
+                    <i class="fa-solid fa-layer-group"></i>
+                    All
+                    <span class="pill-count">{{ total_count }}</span>
+                </button>
+                {% for category in categories %}
+                <button class="filter-pill" data-filter="{{ category.name }}">
+                    {% if 'video' in category.name %}
                         <i class="fa-solid fa-video"></i>
-                    {% elif resource.category_name == 'study-guide' %}
+                    {% elif category.name == 'study-guide' %}
                         <i class="fa-solid fa-book"></i>
-                    {% elif resource.category_name == 'past-paper' %}
+                    {% elif category.name == 'past-paper' %}
                         <i class="fa-solid fa-file-lines"></i>
                     {% else %}
                         <i class="fa-solid fa-folder"></i>
                     {% endif %}
-                    {{ resource.category_name | replace('-', ' ') | title }}
-                </span>
-
-                <h3>{{ resource.title }}</h3>
-                <p class="resource-description">{{ resource.description }}</p>
-
-                <a href="{{ resource.url }}" target="_blank" class="resource-button">
-                    {% if 'video' in resource.category_name %}
-                        <i class="fa-solid fa-play"></i> Watch
-                    {% elif resource.category_name == 'past-paper' %}
-                        <i class="fa-solid fa-download"></i> Download
-                    {% else %}
-                        <i class="fa-solid fa-arrow-up-right-from-square"></i> View
-                    {% endif %}
-                </a>
-
+                    {{ category.name | replace('-', ' ') | title }}
+                    <span class="pill-count">{{ category.resource_count }}</span>
+                </button>
+                {% endfor %}
             </div>
-            {% endfor %}
-        </div>
 
+            <!-- Resource Grid -->
+            <div class="resource-grid" id="resource-container">
+                {% for resource in resources %}
+                <div class="resource-card"
+                    data-category="{{ resource.category_name }}"
+                    data-standard="{{ resource.standard_id }}">
+
+                    <span class="resource-type-badge {{ resource.category_name }}">
+                        {% if 'video' in resource.category_name %}
+                            <i class="fa-solid fa-video"></i>
+                        {% elif resource.category_name == 'study-guide' %}
+                            <i class="fa-solid fa-book"></i>
+                        {% elif resource.category_name == 'past-paper' %}
+                            <i class="fa-solid fa-file-lines"></i>
+                        {% else %}
+                            <i class="fa-solid fa-folder"></i>
+                        {% endif %}
+                        {{ resource.category_name | replace('-', ' ') | title }}
+                    </span>
+
+                    <h3>{{ resource.title }}</h3>
+                    <p class="resource-description">{{ resource.description }}</p>
+
+                    <a href="{{ resource.url }}" target="_blank" class="resource-button">
+                        {% if 'video' in resource.category_name %}
+                            <i class="fa-solid fa-play"></i> Watch
+                        {% elif resource.category_name == 'past-paper' %}
+                            <i class="fa-solid fa-download"></i> Download
+                        {% else %}
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i> View
+                        {% endif %}
+                    </a>
+
+                </div>
+                {% endfor %}
+            </div>
+
+        </div>
     </div>
 </div>
 
