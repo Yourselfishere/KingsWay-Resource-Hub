@@ -1,195 +1,178 @@
 {% extends "base.html" %}
 {% block body_class %}subject-page{% endblock %}
-
-{% block title %} {{ subject.name }} | KWS Resource Hub {% endblock %}
+{% block title %}{{ subject.name }} | KWS Resource Hub{% endblock %}
 
 {% block content %}
 
-<!-- Subject header -->
-<section class="subject-header"
-    style = "--subject-colour: {{ subject.colour }}">
+<!-- Subject Header -->
+<section class="subject-header">
     <div class="subject-header-container">
-
-        <!-- icon from the database -->
-        <i class = "{{ subject.icon }}"></i>
-
-        <!-- name and description -->
-        <div class="subject-header-text">
-            <h1>{{ subject.name }}</h1>
-            <p>{{ subject.description }}</p>
-        </div>
-
+        <i class="{{ subject.icon }}"></i>
+        <h1>{{ subject.name }}</h1>
+        <p>Select your NCEA level and standard</p>
     </div>
 </section>
 
-<!-- Main section -->
-<div class="subject-wrapper">
+<!-- Level Selector -->
+<div class="level-selector">
+    <button class="level-btn active" data-level="2">Level 2</button>
+    <button class="level-btn" data-level="3">Level 3</button>
+</div>
 
-    <!-- Sidebar -->
-    <aside class="subject-sidebar">
+<!-- Standards Container -->
+<div class="standards-container">
 
-        <!-- NCEA level filter -->
-        <div class="ncea-filter">
-            <h3 class="ncea-filter-text"> NCEA Level </h3>
-            <ul>
-                <li>
-                    <label>
-                        <input type="checkbox" data-level="2" checked>
-                        Level 2
-                    </label>
-                </li>
-
-                <li>
-                    <label>
-                        <input type="checkbox" data-level="3" checked>
-                        Level 3
-                    </label>
-                </li>
-            </ul>
+    <!-- Standards Tabs -->
+    <div class="standards-tabs">
+        <div class="standards-tab-list">
+            {% for standard in standards %}
+            <button class="standard-tab {% if loop.first %}active{% endif %}"
+                    data-standard="{{ standard.code }}"
+                    data-level="{{ standard.ncea_level }}"
+                    data-description="{{ standard.description }}">
+                <span class="standard-code">{{ standard.code }}</span>
+                <span class="standard-name">{{ standard.topic }}</span>
+            </button>
+            {% endfor %}
         </div>
-        <!-- Filter section -->
-        <div class="filter-section">
-            <h3>Resource Type</h3>
-            <ul>
-                {% for category in categories %}
-                <li>
-                    <label>
-                        <input type="checkbox" class="filter-checkbox" data-category="{{ category.name | lower }}" checked> {{ category.name }}
-                        <span class="filter-count">
-                            {{ category.resource_count }}
-                        </span>
-                    </label>
+    </div>
 
-                </li>
-                {% endfor %}
+    <!-- Standard Content -->
+    <div class="standard-content">
 
-            </ul>
+        <!-- Standard Header -->
+        <div class="standard-header">
+            {% if standards %}
+            <h2 class="standard-title">{{ standards[0].code }} — {{ standards[0].description }}</h2>
+            {% else %}
+            <h2 class="standard-title">{{ subject.name }} Resources</h2>
+            {% endif %}
+            <span class="resource-count-badge" id="resource-count-badge">{{ total_count }} resources</span>
         </div>
 
-        <!-- Counter section -->
-        <div class="resource-counter" style="background: var(--subject-colour)">
-            <span class="counter-number" id="resource-count">
-                {{ total_count }}
-            </span>
-            <span class="counter-label">Resources Found</span>
-        </div>
-
-    </aside>
-
-    <!-- Right main section -->
-    <main class="subject-content">
-        
-        <!-- Subject title bar -->
-        <div class="subject-title-bar">
-
-            <!-- Breadcrumb nav -->
-            <nav class="subject-breadcrumb" aria-label="Breadcrumb">
-                <a href="/"><i class="fa-solid fa-house"></i></a>
-                <span class="breadcrumb-arrow">,</span>
-
-                <!-- Dynamic NCEA level indicator -->
-                <span class="breadcrumb-level" id="breadcrumb-level">
-                    All Levels
-                </span>
-
-                <span class="breadcrumb-arrow">,</span>
-
-                <!-- Current subject -->
-                <span class="breadcrumb-current">
-                    <i class="{{ subject.icon }}"></i>
-                    {{ subject.name }}
-                </span>
-            </nav>
-
-            <!-- Subject title -->
-            <div class="subject-title-row">
-                <h1 class="subject-title">{{ subject.name }}</h1>
-                <span class="subject-resource-count">{{ total_count }} resources</span>
-            </div>
-        </div>
-        <!-- Top bar -->
-        <div class="content-topbar">
-            
-            <!-- Search bar -->
-            <input type="text" placeholder="Search {{ subject.name }} resources..." id="subject-search-input">
-
-            <!-- Search button -->
-            <button id="search-button">Search</button>
-
-            <!-- Grid/list toggle -->
-            <div class="view-toggle">
-                <!-- Grid button -->
-                <button class="toggle-button-active" id="grid-button">
-                    <i class="fa-solid fa-grip"></i>
-                </button>
-                <!-- List button -->
-                <button class="toggle-button" id="list-button">
-                    <i class="fa-solid fa-list"></i>
-                </button>
-            </div>
-
-        </div>
-
-        <!-- Resource type -->
-        <div class="resource-tabs">
-            <button class="tab active" data-filter="all">
-                All ({{ total_count }})
+        <!-- Filter Pills -->
+        <div class="filter-pills">
+            <button class="filter-pill active" data-filter="all">
+                <i class="fa-solid fa-layer-group"></i>
+                All
+                <span class="pill-count">{{ total_count }}</span>
             </button>
             {% for category in categories %}
-            <button class="tab" data-filter="{{ category.name | lower }}">
-                {{ category.name }} ({{ category.resource_count }})
+            <button class="filter-pill" data-filter="{{ category.name }}">
+                {% if 'video' in category.name %}
+                    <i class="fa-solid fa-video"></i>
+                {% elif category.name == 'study-guide' %}
+                    <i class="fa-solid fa-book"></i>
+                {% elif category.name == 'past-paper' %}
+                    <i class="fa-solid fa-file-lines"></i>
+                {% else %}
+                    <i class="fa-solid fa-folder"></i>
+                {% endif %}
+                {{ category.name | replace('-', ' ') | title }}
+                <span class="pill-count">{{ category.resource_count }}</span>
             </button>
             {% endfor %}
         </div>
 
         <!-- Resource Grid -->
         <div class="resource-grid" id="resource-container">
-            <!-- loop through the resources from flask -->
             {% for resource in resources %}
+            <div class="resource-card"
+                 data-category="{{ resource.category_name }}"
+                 data-standard="{{ resource.standard_id }}">
 
-            <div class="resource-card" data-category="{{ resource.category_name | lower }}">
-                <!-- Category badge -->
-                <span class="category-badge {{ resource.category_name | lower }}">
-                    {{ resource.category_name }}
+                <span class="resource-type-badge {{ resource.category_name }}">
+                    {% if 'video' in resource.category_name %}
+                        <i class="fa-solid fa-video"></i>
+                    {% elif resource.category_name == 'study-guide' %}
+                        <i class="fa-solid fa-book"></i>
+                    {% elif resource.category_name == 'past-paper' %}
+                        <i class="fa-solid fa-file-lines"></i>
+                    {% else %}
+                        <i class="fa-solid fa-folder"></i>
+                    {% endif %}
+                    {{ resource.category_name | replace('-', ' ') | title }}
                 </span>
 
-                <!-- Card body -->
-                <div class="resource-card-body">
-                    <h3>{{ resource.title }}</h3>
-                    <p class="resource-meta">
-                        {{ subject.name }} · {{resource.category_name}}
-                    </p>
-                    <p class="resource-description">
-                        {{ resource.description }}
-                    </p>
-                </div>
-                
-                <!-- Card footer -->
-                <div class="resource-card-footer">
-                    <a href="{{ resource.url }}" target="_blank" class="resource-button">
-                        {% if resource.category_name == "Videos" %}
-                            Watch
-                        {% elif resource.category_name == "Past Papers" %}
-                            Download
-                        {% else %}
-                            View
-                        {% endif %}
-                    </a>
-                </div>
+                <h3>{{ resource.title }}</h3>
+                <p class="resource-description">{{ resource.description }}</p>
+
+                <a href="{{ resource.url }}" target="_blank" class="resource-button">
+                    {% if 'video' in resource.category_name %}
+                        <i class="fa-solid fa-play"></i> Watch
+                    {% elif resource.category_name == 'past-paper' %}
+                        <i class="fa-solid fa-download"></i> Download
+                    {% else %}
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> View
+                    {% endif %}
+                </a>
 
             </div>
             {% endfor %}
         </div>
-        
-    
-        <!-- Pagination -->
-        <div class="pagination">
-            <button class="page-button">← Prev</button>
-            <span class="current-page-indicator">Page 1</span>
-            <button class="page-button">Next →</button>
-        </div>
 
-    </main>
-    
+    </div>
 </div>
-{% endblock %} 
+
+<script>
+// Level Selector 
+document.querySelectorAll('.level-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        document.querySelectorAll('.level-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+
+        const level = this.dataset.level;
+        document.querySelectorAll('.standard-tab').forEach(tab => {
+            tab.style.display = tab.dataset.level === level ? 'block' : 'none';
+        });
+
+        const firstVisible = document.querySelector(`.standard-tab[data-level="${level}"]`);
+        if (firstVisible) firstVisible.click();
+    });
+});
+
+// Standard Tabs
+document.querySelectorAll('.standard-tab').forEach(tab => {
+    tab.addEventListener('click', function() {
+        document.querySelectorAll('.standard-tab').forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+
+        const code = this.dataset.standard;
+        const desc = this.dataset.description;
+
+        document.querySelector('.standard-title').textContent = code + ' — ' + desc;
+
+        let count = 0;
+        document.querySelectorAll('.resource-card').forEach(card => {
+            const show = card.dataset.standard === code;
+            card.style.display = show ? 'block' : 'none';
+            if (show) count++;
+        });
+
+        document.getElementById('resource-count-badge').textContent = count + ' resources';
+
+        // Reset filter pills to All
+        document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+        document.querySelector('.filter-pill[data-filter="all"]').classList.add('active');
+    });
+});
+
+// Filter Pills 
+document.querySelectorAll('.filter-pill').forEach(pill => {
+    pill.addEventListener('click', function() {
+        document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+        this.classList.add('active');
+
+        const filter = this.dataset.filter;
+        const activeStandard = document.querySelector('.standard-tab.active')?.dataset.standard;
+
+        document.querySelectorAll('.resource-card').forEach(card => {
+            const categoryMatch = filter === 'all' || card.dataset.category === filter;
+            const standardMatch = !activeStandard || card.dataset.standard === activeStandard;
+            card.style.display = (categoryMatch && standardMatch) ? 'block' : 'none';
+        });
+    });
+});
+</script>
+
+{% endblock %}

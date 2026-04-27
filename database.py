@@ -5,7 +5,7 @@
 import sqlite3, mysql
 
 # DB_Config - for SQLite, just the db file
-DB_FILE = 'app.db'
+DB_FILE = '../app.db'
 
 # Connect to the database
 def get_db_connection():

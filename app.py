@@ -2,6 +2,7 @@
 # Defines all the flask routes and each route handles one url template
 
 # import flask
+import flask 
 from flask import Flask, render_template, request, jsonify
 
 # import query_db
@@ -13,10 +14,7 @@ app = Flask(__name__)
 # handles all queries to the homepage "/"
 @app.route("/")
 def index():
-    # query all rows from the subjects table and order by subject_id
     subjects = query_db("SELECT * FROM subjects ORDER BY subject_id")
-    print([dict(row) for row in subjects])
-
     # give the subjects list to index.html
     # makes the subjects a list of dictionaries 
     return render_template("index.html", subjects=subjects)
@@ -72,6 +70,14 @@ def subject_page(subject_url):
         ORDER BY categories.name
     """, (subject["subject_id"],))
     
+    # get standards for a subjected ordered by level then code 
+    standards = query_db(""" 
+        SELECT *
+        FROM standards
+        WHERE subject_id = ?
+        ORDER BY ncea_level, code
+    """, (subject["subject_id"],))
+
     # get total resource count
     total = query_db("""
         SELECT COUNT(*) AS total
@@ -86,7 +92,8 @@ def subject_page(subject_url):
         subject=subject,
         resources=resources,
         categories=categories,
-        total_count=total_count
+        total_count=total_count,
+        standards=standards,
     )
 
 if __name__ == "__main__":
