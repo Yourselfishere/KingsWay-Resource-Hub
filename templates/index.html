@@ -67,7 +67,6 @@
         <div class="card-container">
             
             <!-- Jinja loop for subject cards -->
-
             {% for subject in subjects %}
                 <a href="/{{subject.url}}"
                     class="subject-card {{subject.name | lower}}">
@@ -77,7 +76,7 @@
 
                         <!-- Resource Counter placeholder -->
                         <div class="resource-badge">
-                            ?
+                            {{ subject.resource_count }} 
                         </div>
                 </a>
             {% endfor %}

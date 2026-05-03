@@ -31,6 +31,7 @@
                 <button class="standard-tab {% if loop.first %}active{% endif %}"
                         data-standard="{{ standard.code }}"
                         data-level="{{ standard.ncea_level }}"
+                        data-standard-id="{{ standard.standard_id }}"
                         data-description="{{ standard.description }}">
                     <span class="standard-code">{{ standard.code }}</span>
                     <span class="standard-name">{{ standard.topic }}</span>
@@ -103,7 +104,7 @@
                         {% if 'video' in resource.category_name %}
                             <i class="fa-solid fa-play"></i> Watch
                         {% elif resource.category_name == 'past-paper' %}
-                            <i class="fa-solid fa-download"></i> Download
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i> View
                         {% else %}
                             <i class="fa-solid fa-arrow-up-right-from-square"></i> View
                         {% endif %}
@@ -113,69 +114,14 @@
                 {% endfor %}
             </div>
 
+            <!-- Empty state -->
+            <div class="empty-state" id="empty-state" style="display:none;">
+                <i class="fa-solid fa-folder-open"></i>
+                <p>No resources for this standard yet.</p>
+            </div>
+
         </div>
     </div>
 </div>
-
-<script>
-// Level Selector 
-document.querySelectorAll('.level-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
-        document.querySelectorAll('.level-btn').forEach(b => b.classList.remove('active'));
-        this.classList.add('active');
-
-        const level = this.dataset.level;
-        document.querySelectorAll('.standard-tab').forEach(tab => {
-            tab.style.display = tab.dataset.level === level ? 'block' : 'none';
-        });
-
-        const firstVisible = document.querySelector(`.standard-tab[data-level="${level}"]`);
-        if (firstVisible) firstVisible.click();
-    });
-});
-
-// Standard Tabs
-document.querySelectorAll('.standard-tab').forEach(tab => {
-    tab.addEventListener('click', function() {
-        document.querySelectorAll('.standard-tab').forEach(t => t.classList.remove('active'));
-        this.classList.add('active');
-
-        const code = this.dataset.standard;
-        const desc = this.dataset.description;
-
-        document.querySelector('.standard-title').textContent = code + ' — ' + desc;
-
-        let count = 0;
-        document.querySelectorAll('.resource-card').forEach(card => {
-            const show = card.dataset.standard === code;
-            card.style.display = show ? 'block' : 'none';
-            if (show) count++;
-        });
-
-        document.getElementById('resource-count-badge').textContent = count + ' resources';
-
-        // Reset filter pills to All
-        document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
-        document.querySelector('.filter-pill[data-filter="all"]').classList.add('active');
-    });
-});
-
-// Filter Pills 
-document.querySelectorAll('.filter-pill').forEach(pill => {
-    pill.addEventListener('click', function() {
-        document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
-        this.classList.add('active');
-
-        const filter = this.dataset.filter;
-        const activeStandard = document.querySelector('.standard-tab.active')?.dataset.standard;
-
-        document.querySelectorAll('.resource-card').forEach(card => {
-            const categoryMatch = filter === 'all' || card.dataset.category === filter;
-            const standardMatch = !activeStandard || card.dataset.standard === activeStandard;
-            card.style.display = (categoryMatch && standardMatch) ? 'block' : 'none';
-        });
-    });
-});
-</script>
 
 {% endblock %}

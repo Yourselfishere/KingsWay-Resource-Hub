@@ -15,8 +15,17 @@ app = Flask(__name__)
 @app.route("/")
 def index():
     subjects = query_db("SELECT * FROM subjects ORDER BY subject_id")
-    # give the subjects list to index.html
-    # makes the subjects a list of dictionaries 
+    # Convert to dictionaries so we can add properties
+    subjects = [dict(s) for s in subjects]
+    
+    # Get the resource counts for each subject so that it can be displayed correctly
+    for subject in subjects: 
+        count = query_db(
+            "SELECT COUNT(*) AS total FROM resources WHERE subject_id = ?",
+            (subject["subject_id"],)
+        )
+        subject["resource_count"] = count[0]["total"] if count else 0
+
     return render_template("index.html", subjects=subjects)
     
 # 404 page

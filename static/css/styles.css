@@ -703,7 +703,7 @@ body {
     cursor: pointer;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 16px;
 }
 
 .resource-card:hover {
@@ -751,6 +751,7 @@ body {
     font-size: 1.05rem;
     font-weight: 700;
     color: #1e2d3d;
+    padding-top: 7px;
     margin: 0;
     line-height: 1.4;
 }
