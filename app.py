@@ -66,17 +66,23 @@ def subject_page(subject_url):
     """, (subject["subject_id"],))
     
     # get categories with resource counts
-    categories = query_db("""
+    categories = query_db(""" 
         SELECT 
             categories.categories_id,
             categories.name,
             COUNT(resources.resource_id) AS resource_count
         FROM categories
-        JOIN resources 
+        LEFT JOIN resources 
             ON categories.categories_id = resources.categories_id
-        WHERE resources.subject_id = ?
+            AND resources.subject_id = ?
         GROUP BY categories.categories_id, categories.name
-        ORDER BY categories.name
+        ORDER BY CASE categories.name
+            WHEN 'video-tutorial'    THEN 2
+            WHEN 'relevant-videos'   THEN 3
+            WHEN 'study-guide'       THEN 4
+            WHEN 'past-paper'        THEN 1
+            WHEN 'other'             THEN 5
+        END
     """, (subject["subject_id"],))
     
     # get standards for a subjected ordered by level then code 

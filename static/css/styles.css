@@ -348,16 +348,21 @@ body {
 }
 
 /* Subject card colours */
-.subject-card.maths        { border-top: 4px solid #3498db; }
-.subject-card.science      { border-top: 4px solid #27ae60; }
+.subject-card.calculus        { border-top: 4px solid #3498db; }
+.subject-card.statistics     { border-top: 4px solid #3498db; }
 .subject-card.english      { border-top: 4px solid #e74c3c; }
-.subject-card.digital-tech { border-top: 4px solid #9b59b6; }
+.subject-card.dgt { border-top: 4px solid #9b59b6; }
+.subject-card.chemistry { border-top: 4px solid #27ae60; }
+.subject-card.biology { border-top: 4px solid #2ecc71; }
+.subject-card.physics { border-top: 4px solid #1abc9c}
 
 /* Subject icon colours */
-.subject-card.maths i        { color: #3498db; }
-.subject-card.science i      { color: #27ae60; }
+.subject-card.calculus i, .subject-card.statistics i        { color: #3498db; }
+.subject-card.chemistry i      { color: #27ae60; }
+.subject-card.biology i      { color: #2ecc71; }
+.subject-card.physics i      { color: #1abc9c; }
 .subject-card.english i      { color: #e74c3c; }
-.subject-card.digital-tech i { color: #9b59b6; }
+.subject-card.dgt i { color: #9b59b6; }
 
 /* Resource badge */
 .resource-badge {

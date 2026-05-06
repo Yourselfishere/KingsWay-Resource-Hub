@@ -68,7 +68,7 @@
                         <i class="fa-solid fa-book"></i>
                     {% elif category.name == 'past-paper' %}
                         <i class="fa-solid fa-file-lines"></i>
-                    {% else %}
+                    {% elif category.name == 'other' %}
                         <i class="fa-solid fa-folder"></i>
                     {% endif %}
                     {{ category.name | replace('-', ' ') | title }}
