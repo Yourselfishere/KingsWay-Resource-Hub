@@ -19,13 +19,38 @@
         <div class="logo">
             <a href="/"><img src="/static/img/KingsWayLogo.svg" alt="KingsWayLogo"></a>
         </div>
-        <!-- Nav Bar Links -->
-        <ul class="nav_links">
-            <li><a href="/">Home</a></li>
-            {% for subject in subjects %}
-                <li><a href="/{{ subject.url }}">{{ subject.name }}</a></li>
-            {% endfor %}
-        </ul>
+
+        <div class="nav-menu-wrapper">
+            <button class="menu-btn" id="menu-btn">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+                <div class="nav-dropdown" id="nav-dropdown">
+                    {% for group_name, group_subjects in menu_group.items() %}
+                    <div class="nav-group">
+                        <div class="nav-group-header">
+                            <i class="fa-solid fa-folder"></i>
+                            {{ group_name }}
+                            <i class="fa-solid fa-chevron-right nav-chevron"></i>
+                        </div>
+                        <div class="nav-submenu">
+                            {% for subject in group_subjects %}
+                            <a href="/{{ subject.url }}" class="nav-subitem">
+                                <i class="{{ subject.icon }}"></i>
+                                {{ subject.name }}
+                            </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <div class="nav-divider"></div>
+                    {% for subject in menu_solo %}
+                    <a href="/{{ subject.url }}" class="nav-item">
+                        <i class="{{ subject.icon }}"></i>
+                        {{ subject.name }}
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
     </nav>
 
     {% block content %}
@@ -65,10 +90,13 @@
                 <p class="footer-links">Quick Links</p>
                     <ul>
                         <li><a href="/">Home</a></li>
-                        <li><a href="/mathematics">Maths</a></li>
-                        <li><a href="/science">Science</a></li>
+                        <li><a href="/mathematics">Calculus</a></li>
+                        <li><a href="/statistics">Statistics</a></li>
                         <li><a href="/english">English</a></li>
                         <li><a href="/dgt">DGT</a></li>
+                        <li><a href="/biology">Biology</a></li>
+                        <li><a href="/chemistry">Chemistry</a></li>
+                        <li><a href="/physics">Physics</a></li>
                     </ul>
             </div>
         </div>

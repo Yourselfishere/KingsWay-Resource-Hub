@@ -49,31 +49,162 @@ body {
     margin: 4px 20px; 
 }
 
-/* Navigation links */
-.nav_links {
+/* Dropdown menu icon */
+.nav-menu-wrapper {
+    position: relative;
+    margin-right: 24px;
+}
+
+.menu-btn{
     display: flex;
-    gap:10px;
-    list-style: none;
-    padding: 4px 5%;
-}
-
-.nav_links li {
-    margin-left: 20px;
-}
-
-/* Link text style */
-.nav_links a {
-    text-decoration: none;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: rgba(255,255,255, 0.15);
+    border: 1.5px solid rgba(255,255,255,0.3);
+    border-radius: 8%;
     color: #FFCB70;
-    font-family: sans-serif;
-    font-size: 18px;    
-    transition: 0.3s ease;
+    font-family: 'Inter', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease; 
 }
 
-/* Link text hover state */
-.nav_links a:hover {
-    color: #ffffff;
+.menu-btn:hover {
+    background: rgba(255,255,255, 0.25);
+    border-color: rgba(255,255,255,0.5);
 }
+
+/* Dropdown menu */
+.nav-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    min-width: 220px;
+    padding: 8px;
+    z-index: 2000;
+}
+
+.nav-dropdown.open {
+    display: block;
+}
+
+/* Single nav items (English, DGT) */
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    color: #333;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background 0.15s ease;
+}
+
+.nav-item:hover {
+    background: #f5f5f5;
+    color: #111;
+}
+
+.nav-item i {
+    width: 16px;
+    text-align: center;
+    color: #999;
+    font-size: 0.85rem;
+}
+
+/* Submenu links */
+.nav-subitem {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 14px;
+    border-radius: 8px;
+    color: #555;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+/* Group headers */
+.nav-group {
+    position: relative;
+}
+
+.nav-group-header {
+    display: flex; 
+    justify-content: center;
+    gap: 10px; 
+    padding: 10px 14px;
+    border-radius: 10px;
+    color: #333;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s ease;
+    user-select: none;
+}
+
+.nav-group-header:hover {
+    background: #f5f5f5
+}
+
+.nav-group-header > i:first-child {
+    width: 16px;
+    text-align: center;
+    color: #999;
+    font-size: 0.85rem;
+}
+
+.nav-chevron {
+    margin-left: auto;
+    font-size: 0.7rem;
+    color: #bbb;
+    transition: transform 0.2s ease;
+}
+
+.nav-group.open .nav-chevron {
+    transform: rotate(90deg);
+}
+
+/* Submenu */
+.nav-submenu {
+    display: none;
+    padding-left: 12px;
+    padding-bottom: 4px;
+}
+
+.nav-group.open .nav-submenu {
+    display: block;
+}
+
+.nav-subitem:hover {
+    background: #f0f0f0;
+    color: #111;
+}
+
+.nav-subitem i {
+    width: 16px;
+    text-align: center;
+    color: #bbb;
+    font-size: 0.8rem;
+}
+
+/* Divider */
+.nav-divider {
+    height: 1px;
+    background: #f0f0f0;
+    margin: 6px 8px;
+}
+
 
 /* =====================
    Main page sections (index.html)

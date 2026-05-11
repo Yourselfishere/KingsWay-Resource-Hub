@@ -1,3 +1,59 @@
+//-----------------------------------------------------------------------------------------------------------------------------//
+// BASE PAGE (Nav and Footer)
+// Nav Dropdown 
+var menuBtn = document.getElementById('menu-btn');
+var navDropdown = document.getElementById('nav-dropdown');
+
+// We can toggle the dropdown (open/close) by "Listening" for a click
+if (menuBtn) {
+    menuBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        navDropdown.classList.toggle('open');
+    });
+}
+
+// Dropdown closes when we click outside
+// We "listen" for clicks on the page so that we can detect when a user clicks away from the menu
+// This is like a clikc to dismiss behaviour
+document.addEventListener(('click'), function(e) {
+    // Check if the for three things
+    // (1) Dropdown exists
+    // (2) The click wasn't inside the dropdown
+    // (3) The click wasn't on teh menu button
+    if (navDropdown && !navDropdown.contains(e.target) && e.target !== menuBtn) {
+        // Remove the open state of the dropdown to hide the dropdown 
+        navDropdown.classList.remove('open');
+
+        // Close all the other submenu because everything "collapses upon menu close"
+        document.querySelectorAll('.nav-group.open').forEach(function(g) {
+            g.classList.remove('open');
+        });
+    }
+});
+
+// Toggle like an accordian 
+// By adding events to each header, users can collapse or expand the section whilst keeping these original ones open
+document.querySelectorAll('.nav-group-header').forEach(function(header) {
+    header.addEventListener('click', function(e) {
+        // We stop the even from reaching teh document click handler, or else closing a header would automatically close the entire dropdown
+        e.stopPropagation(); 
+
+        var group = this.parentElement;
+        var active = group.classList.contains('open');
+
+        // Reset all the groups to closed before opening one section so that it is more clean
+        document.querySelectorAll('.nav-group').forEach(function(g) {
+            g.classList.remove('open');
+        });
+
+        // Toggle "open" for the clicked group if it isn't open already
+        if (!active) {
+            group.classList.add('open')
+        }
+
+    })
+});
+//-----------------------------------------------------------------------------------------------------------------------------//
 // HOME PAGE 
 window.addEventListener('scroll', () => {
   const navbar = document.querySelector('.topnavbar') // Select the nav element

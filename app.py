@@ -36,7 +36,19 @@ def page_not_found(e):
 @app.context_processor
 def inject_subjects():
     subjects = query_db("SELECT * FROM subjects ORDER BY subject_id")
-    return dict(subjects=subjects)
+
+    groups = {}
+    solo = []
+    for s in subjects: 
+        # Fixed error
+        # Before it would crash if there were no menu groups but now it places everything into "Null" if there isn't.
+        s_dict = dict(s)
+        menu_group = s_dict.get('menu_group')
+        if menu_group: 
+            groups.setdefault(menu_group, []).append(s)
+        else: 
+            solo.append(s)
+    return dict(subjects=subjects, menu_group=groups, menu_solo=solo)
 
 # Subject pages
 @app.route("/<subject_url>")
