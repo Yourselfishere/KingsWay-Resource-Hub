@@ -2,10 +2,13 @@
 # Handles the database connection and query
 
 # import sqlite3
-import sqlite3, mysql
+import sqlite3, mysql, os
 
 # DB_Config - for SQLite, just the db file
-DB_FILE = '../app.db'
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+DB_FILE = os.path.join(BASE_DIR, 'app.db')
 
 # Connect to the database
 def get_db_connection():
