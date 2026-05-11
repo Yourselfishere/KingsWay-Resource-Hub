@@ -390,7 +390,9 @@ body {
     line-height: 1.7rem;
     margin: 0 0 20px 0;
     max-width: 600px;
+    text-align: center;
 }
+
 /* Mobile responsive */
 @media (max-width: 480px) {
     .hero-container h1 {
